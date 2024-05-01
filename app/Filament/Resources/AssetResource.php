@@ -14,7 +14,6 @@ use Filament\Tables\Columns\Column;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
@@ -26,9 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\AssetResource\Pages\EditAsset;
 use App\Filament\Resources\AssetResource\Pages\ListAssets;
 use App\Filament\Resources\AssetResource\RelationManagers;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use App\Filament\Resources\AssetResource\Pages\CreateAsset;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 
 class AssetResource extends Resource
@@ -43,11 +40,7 @@ class AssetResource extends Resource
             ->schema([
                     TextInput::make('Asset Tag'),
                     TextInput::make('Serial'),
-                    Select::make('Model')
-                    ->options([
-                        'gadget' => 'Gadget',
-                        'service' => 'Services'
-                    ]),
+                    Select::make('Model'),
                     Select::make('status')
                     ->options([
                         'active' => 'Active',
@@ -58,8 +51,10 @@ class AssetResource extends Resource
                     TextInput::make('Notes')
                     ->columns(3),
                     TextInput::make('Location'),
-                    FileUpload::make('Images')
-                    ->columns(1),
+                    FileUpload::make('image')
+                    ->label('Image')
+                    ->acceptedFileTypes(['image/*'])
+                    ->rules('image', 'max:2048')
 
             ])->columns(1);
     }
@@ -68,7 +63,8 @@ class AssetResource extends Resource
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('Image'),
+                Tables\Columns\TextColumn::make('name'),
+                ImageColumn::make('Image')->square(),
                 Tables\Columns\TextColumn::make('Asset Tag')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('Serial'),
                 Tables\Columns\TextColumn::make('Model'),

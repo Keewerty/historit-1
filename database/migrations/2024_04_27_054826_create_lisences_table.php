@@ -18,8 +18,6 @@ return new class extends Migration
             $table->date('Expiration Date');
             $table->string('Email');
             $table->string('License Name');
-            $table->integer('quantity');
-            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }

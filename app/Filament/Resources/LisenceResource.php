@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LisenceResource\Pages;
-use App\Filament\Resources\LisenceResource\RelationManagers;
-use App\Models\Lisences;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Lisences;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\LisenceResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\LisenceResource\RelationManagers;
+use Faker\Provider\ar_EG\Text;
 
 class LisenceResource extends Resource
 {
@@ -23,15 +26,23 @@ class LisenceResource extends Resource
     {
         return $form
             ->schema([
-                //
-            ]);
+                TextInput::make('Name'),
+                TextInput::make('Product Key'),
+                TextInput::make('Email'),
+                TextInput::make('License Name')
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('Name'),
+                TextColumn::make('Product Key'),
+                TextColumn::make('Email'),
+                TextColumn::make('License Name'),
+                TextColumn::make('created_at')
+                ->dateTime()
             ])
             ->filters([
                 //
