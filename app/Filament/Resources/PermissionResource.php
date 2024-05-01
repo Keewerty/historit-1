@@ -2,26 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PermissionResource\Pages;
-use App\Filament\Resources\PermissionResource\RelationManagers;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
-use Spatie\Permission\Models\Permission;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Spatie\Permission\Models\Permission;
+use App\Filament\Resources\PermissionResource\Pages;
 
 
 class PermissionResource extends Resource
 {
     protected static ?string $model = Permission::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-key';
 
     protected static ?string $navigationGroup = 'Admin Management';
 
@@ -54,11 +51,16 @@ class PermissionResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManagePermissions::route('/'),
         ];
-    }    
+    }
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
+
