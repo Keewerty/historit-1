@@ -1,7 +1,14 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\AuthServiceProvider;
 use Illuminate\Support\Facades\Facade;
+use App\Providers\EventServiceProvider;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use App\Providers\FilamentServiceProvider;
+use Spatie\Permission\PermissionServiceProvider;
+use Illuminate\Broadcasting\BroadcastServiceProvider;
 
 return [
 
@@ -83,7 +90,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +103,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        App\Providers\FilamentServiceProvider::class,
     ])->toArray(),
 
     /*

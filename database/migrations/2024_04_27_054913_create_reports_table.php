@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function(Blueprint $table) {
-            $table->boolean('is_admin')->after('name')->default(0);
+        Schema::create('reports', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('quantity');
+            $table->decimal('price', 8, 2);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_admin');
-        });
+        Schema::dropIfExists('reports');
     }
 };
