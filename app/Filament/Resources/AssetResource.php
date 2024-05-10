@@ -27,7 +27,6 @@ use App\Filament\Resources\AssetResource\Pages\ListAssets;
 use App\Filament\Resources\AssetResource\RelationManagers;
 use App\Filament\Resources\AssetResource\Pages\CreateAsset;
 
-
 class AssetResource extends Resource
 {
     protected static ?string $model = Asset::class;
@@ -57,6 +56,7 @@ class AssetResource extends Resource
                     ->rules('image', 'max:2048')
 
             ])->columns(1);
+
     }
 
     public static function table(Table $table): Table
@@ -89,12 +89,22 @@ class AssetResource extends Resource
         ];
     }
 
+    public static function maintenanceForm(Form $form): Form
+    {
+        return $form
+            ->schema([
+                    TextInput::make('Maintenance Date'),TextInput::make('Maintenance Notes'),
+            ])->columns(1);
+    }
+
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListAssets::route('/'),
             'create' => Pages\CreateAsset::route('/create'),
             'edit' => Pages\EditAsset::route('/{record}/edit'),
+            'maintenance' => Pages\EditAsset::route('/{record}/maintenance'),
         ];
     }
 }
