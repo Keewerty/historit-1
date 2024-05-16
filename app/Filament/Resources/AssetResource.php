@@ -39,7 +39,7 @@ class AssetResource extends Resource
             ->schema([
                     TextInput::make('Asset Tag'),
                     TextInput::make('Serial'),
-                    Select::make('Model'),
+                    Select::make('Model')->label('Model'),
                     Select::make('status')
                     ->options([
                         'active' => 'Active',
@@ -63,8 +63,8 @@ class AssetResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                ImageColumn::make('Image')->square(),
+                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                ImageColumn::make('Image')->square()->label('Image'),
                 Tables\Columns\TextColumn::make('Asset Tag')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('Serial'),
                 Tables\Columns\TextColumn::make('Model'),
@@ -93,7 +93,8 @@ class AssetResource extends Resource
     {
         return $form
             ->schema([
-                    TextInput::make('Maintenance Date'),TextInput::make('Maintenance Notes'),
+                    TextInput::make('Maintenance Date')->type('date'),
+                    TextInput::make('Maintenance Notes'),
             ])->columns(1);
     }
 
