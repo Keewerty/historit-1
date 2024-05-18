@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use App\Exports\AssetsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Asset;
 
 
@@ -27,15 +29,23 @@ class AssetController extends Controller
         ]);
     }
 
+    public function export()
+    {
+        return Excel::download(new AssetsExport, 'assets.xlsx');
+    }
+
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $assets = Asset::where('judul', 'LIKE', '%' . $request->search . '%')->paginate(4);
+            $assets = Asset::where('asset_tag', 'LIKE', '%' . $request->search . '%')->paginate(4);
         } else {
             $assets = Asset::all();
         }
 
-        return view('admin/buku/index', compact('assets'));
+
+        return view('assets.index', [
+            'assets' => $assets
+        ]);
     }
 
     /**

@@ -20,7 +20,11 @@ use App\Models\Asset;
 // });
 
 
-Route::get('/', [AssetController::class, 'table'])->name('assets.table');
-Route::get('/assets/index', [AssetController::class, 'table'])->name('assets.index');
+// Route::get('/', [AssetController::class, 'index'])->name('assets.table');
+// Route::get('/assets/index', [AssetController::class, 'index'])->name('assets.index');
+Route::get('/', [AssetController::class, 'index'])->name('assets.index');
 Route::post('/assets/store', [AssetController::class, 'store'])->name('assets.store');
 Route::get('/assets/create', [AssetController::class, 'create'])->name('assets.create');
+
+// export
+Route::get('/assets/export', [AssetController::class, 'export'])->name('assets.export');

@@ -12,7 +12,11 @@
                                                 <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="Search">
                                             </form> --}}
                                             <div class="container-fluid">
-                                                <a href="{{route('assets.create')}}" >Create</a>
+                                                <a href="{{route('assets.create')}}" >
+                                                    <button>
+                                                        Create
+                                                    </button>
+                                                </a>
                                                 <form class="form-inline" action="{{ route('assets.index') }}" method="GET ">
                                                   {{-- <div class="form-group mb-2">
                                                     <input type="search" name="search" class="form-control" placeholder="Search" aria-describedby="password">
@@ -23,9 +27,13 @@
                                                       <input type="text" placeholder="Search.." name="search">
                                                       <button type="submit">search</i></button>
                                                     </form>
+                                                    
                                                   </div>
                                                   </div>
                                               </form>
+                                              <a href="{{route('assets.export')}}">
+                                                <button>Export to Excel</button>
+                                            </a>
                                         </div>
                                     </div>
                                     
