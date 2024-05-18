@@ -3,15 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use App\Models\Asset;
+
 
 class AssetController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function table(Request $request)
     {
-        //
+        if ($request->has('search')) {
+            $assets = Asset::where('asset_tag', 'LIKE', '%' . $request->search . '%')->paginate(4);
+        } else {
+            $assets = Asset::all();
+        }
+
+
+        return view('assets.index', [
+            'assets' => $assets
+        ]);
+    }
+
+    public function index(Request $request)
+    {
+        if ($request->has('search')) {
+            $assets = Asset::where('judul', 'LIKE', '%' . $request->search . '%')->paginate(4);
+        } else {
+            $assets = Asset::all();
+        }
+
+        return view('admin/buku/index', compact('assets'));
     }
 
     /**
@@ -19,7 +43,7 @@ class AssetController extends Controller
      */
     public function create()
     {
-        //
+        return view('assets.create');
     }
 
     /**
@@ -27,7 +51,19 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!empty($request->file('image'))) {
+            $assets = $request->all();
+            $assets['image'] = $request->file('image')->store('image');
+
+            Asset::create($assets);
+
+            return redirect()->route('assets.index');
+        } else {
+            $assets = $request->all();
+            Asset::create($assets);
+
+            return redirect()->route('assets.index');
+        }
     }
 
     /**
@@ -59,6 +95,8 @@ class AssetController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $assets = Asset::findOrFail($id);
+        $assets->delete();
+        return redirect()->route('assets.index');
     }
 }

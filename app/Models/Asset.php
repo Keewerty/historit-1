@@ -9,8 +9,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Asset extends Model implements HasMedia
 {
-    use HasFactory,InteractsWithMedia;
+    use HasFactory, InteractsWithMedia;
 
+    protected $table = 'assets';
+    protected $primarykey = 'id';
     protected $fillable = [
         'asset_tag',
         'serial_number',
@@ -19,8 +21,8 @@ class Asset extends Model implements HasMedia
         'notes',
         'image',
     ];
-    public function Component(){
-        return $this ->hasMany(Asset::class);
+    public function Component()
+    {
+        return $this->hasMany(Asset::class);
     }
 }
-
