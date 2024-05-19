@@ -15,20 +15,6 @@ class AssetController extends Controller
      * Display a listing of the resource.
      */
 
-    public function table(Request $request)
-    {
-        if ($request->has('search')) {
-            $assets = Asset::where('asset_tag', 'LIKE', '%' . $request->search . '%')->paginate(4);
-        } else {
-            $assets = Asset::all();
-        }
-
-
-        return view('assets.index', [
-            'assets' => $assets
-        ]);
-    }
-
     public function export()
     {
         return Excel::download(new AssetsExport, 'assets.xlsx');
@@ -45,6 +31,19 @@ class AssetController extends Controller
 
         return view('assets.index', [
             'assets' => $assets
+        ]);
+    }
+
+    public function detailassets($id)
+    {
+        $assets = Asset::find($id);
+
+        $detailasset = Asset::where('id', $id)->get();
+
+        return view('assets.detail', [
+            'asset' => $assets,
+            'detailasset' => $detailasset
+
         ]);
     }
 
