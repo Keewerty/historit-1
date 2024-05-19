@@ -99,7 +99,30 @@ class AssetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!$request->hasFile('image')) {
+            $asset = Asset::find($id);
+            $asset->update([
+                'asset_tag' => $request->judul,
+                'serial_number' => $request->pengarang,
+                'model' => $request->penerbit,
+                'status' => $request->th_terbit,
+                'note' => $request->note,
+            ]);
+            return redirect()->route('');
+        } else {
+
+            $asset = Asset::find($id);
+            Storage::delete($asset->image);
+            $asset->update([
+                'asset_tag' => $request->judul,
+                'serial_number' => $request->pengarang,
+                'model' => $request->penerbit,
+                'status' => $request->th_terbit,
+                'note' => $request->note,
+                'image' => $request->file('image')->store('assets'),
+            ]);
+            return redirect()->route('');
+        }
     }
 
     /**
