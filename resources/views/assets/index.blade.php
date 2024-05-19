@@ -32,7 +32,6 @@
                                               <input type="text" placeholder="Search.." name="search">
                                               <button type="submit">search</i></button>
                                             </form>
-                                            
                                           </div>
                                           </div>
                                       </form>
@@ -98,8 +97,13 @@
 
 <style>
     .btn_create {
+        margin-left: 88vw;
     background-color: #e18ae8 !important;
     color: white;
     border: none;
-}
+    }
+    .btn_export {
+        margin-left: 88vw;
+        border: none;
+    }
 </style>
