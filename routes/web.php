@@ -26,6 +26,8 @@ Route::get('/', [AssetController::class, 'index'])->name('assets.index');
 Route::post('/assets/store', [AssetController::class, 'store'])->name('assets.store');
 Route::get('/assets/create', [AssetController::class, 'create'])->name('assets.create');
 Route::get('/asset/detail/{id}', [AssetController::class, 'detailassets']);
+Route::post('/asset/{id}/update', [AssetController::class, 'update'])->name('asset.update');
+Route::get('/asset/{id}/destroy', [AssetController::class, 'destroy'])->name('asset.destroy');
 
 // export
 Route::get('/assets/export', [AssetController::class, 'export'])->name('assets.export');

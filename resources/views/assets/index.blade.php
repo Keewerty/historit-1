@@ -1,13 +1,6 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Assets</title>
-    {{-- <link rel="stylesheet" href="resources/css/assets/index.css"> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
+@extends('layout.main')
+
+@section('container')
     
     <div class="main-content">
         <div class="section__content section__content--p30">
@@ -91,19 +84,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+
+    @endsection
 
 
 <style>
     .btn_create {
-        margin-left: 88vw;
-    background-color: #e18ae8 !important;
-    color: white;
-    border: none;
+        margin-left: 66vw;
+        background-color: #e18ae8 !important;
+        color: white;
+        border: none;
+        padding: 5px 15px;
     }
     .btn_export {
-        margin-left: 88vw;
-        border: none;
+        /*  */
     }
 </style>

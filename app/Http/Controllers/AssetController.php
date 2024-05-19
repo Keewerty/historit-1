@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\App;
 use App\Exports\AssetsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Asset;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 
 class AssetController extends Controller
@@ -86,15 +88,16 @@ class AssetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $asset = Asset::findOrFail($id);
+        return view('', compact('asset'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -102,10 +105,11 @@ class AssetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $assets = Asset::findOrFail($id);
-        $assets->delete();
+        $asset = Asset::findOrFail($id);
+        Storage::delete($asset->image);
+        $asset->delete();
         return redirect()->route('assets.index');
     }
 }
